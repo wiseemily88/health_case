@@ -17,7 +17,7 @@ class App extends Component {
       .catch((error) => console.error({error}));
 
       getUserMedicalHistory()
-      .then((medicalhistories) => this.setState({ medicalhistories: medicalhistories }))
+      .then((usermedicalhistories) => this.setState({ usermedicalhistories: usermedicalhistories }))
       .catch((error) => console.error({error}));
     }
 
@@ -25,7 +25,10 @@ class App extends Component {
     return (
       <div className="App">
           <h1 className="App-title">Health Case</h1>
-          <MedicalHistory medicalhistories = {this.state.medicalhistories} usermedicalhistories= {this.state.usermedicalhistories}/>
+          <MedicalHistory
+            medicalhistories = {this.state.medicalhistories}
+            usermedicalhistories= {this.state.usermedicalhistories}
+          />
       </div>
     );
   }

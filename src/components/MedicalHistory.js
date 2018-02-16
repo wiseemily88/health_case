@@ -1,12 +1,12 @@
 import React from 'react';
-import MedicalHistoryList from './MedicalHistoryList';
+import MedicalHistoryForm from './MedicalHistoryForm';
 import UserMedicalHistory from './UserMedicalHistory';
 
 
 const createMedicalHistoryList = (medicalhistories) => {
   return medicalhistories.map((medicalhistory) => {
   return(
-    <MedicalHistoryList
+    <MedicalHistoryForm
       key = {medicalhistory.id}
       medicalhistory = {medicalhistory}
     />
