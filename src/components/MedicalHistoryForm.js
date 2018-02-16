@@ -17,18 +17,24 @@ handleInputChange(event) {
       [name]: value
     });
   }
+ createMedicalHistoryLabels = () => {
+  const medicalhistory = this.props.medicalhistory;
+  return(
+      <label>
+        {medicalhistory.name}
+        <input
+          name="isChecked"
+          type="checkbox"
+          checked={this.state.isChecked}
+          onChange={this.handleInputChange} />
+      </label>
+  )
+}
 
 render() {
     return (
       <form>
-        <label>
-          Yes, I have this condition:
-          <input
-            name="isChecked"
-            type="checkbox"
-            checked={this.state.isChecked}
-            onChange={this.handleInputChange} />
-        </label>
+          {this.createMedicalHistoryLabels()}
         <br />
       </form>
     );
@@ -36,13 +42,5 @@ render() {
 }
 
 
-// const MedicalHistoryList = (props) => {
-//   const medicalhistory = props.medicalhistory;
-//   return(
-//     <div className="medicalhistory-row">
-//       <p className="medicalhistory-name">{medicalhistory.name} </p>
-//     // need to add buttons
-//     </div>
-//   )
-// }
+
 export default MedicalHistoryForm;

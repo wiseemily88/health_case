@@ -5,8 +5,6 @@ const UserMedicalHistory = (props) => {
   return(
     <div className="user-medicalhistory-row">
       <p className="user-name">{usermedicalhistory.name} </p>
-    // notes
-    // delete button
     </div>
   )
 }
