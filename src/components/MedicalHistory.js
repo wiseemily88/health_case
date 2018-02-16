@@ -1,27 +1,38 @@
-import React, {Component} from 'react';
+import React from 'react';
+import MedicalHistoryList from './MedicalHistoryList';
+import UserMedicalHistory from './UserMedicalHistory';
 
 
-class MedicalHistory extends Component {
-render() {
-let medicalhistories = this.props.medicalhistories;
+const createMedicalHistoryList = (medicalhistories) => {
+  return medicalhistories.map((medicalhistory) => {
+  return(
+    <MedicalHistoryList
+      key = {medicalhistory.id}
+      medicalhistory = {medicalhistory}
+    />
+  )}
+)}
 
-  let mappedMedicalHistories = medicalhistories.map((medicalhistory) => {
-    return(
-    <div className="medicalhistory-row">
-      <p className="medicalhistory-name">{medicalhistory.name} </p>
-    </div>
-    )
-  })
+const createUserMedicalHistoryList = (usermedicalhistories) => {
+  return usermedicalhistories.map((usermedicalhistory) => {
+  return(
+    <UserMedicalHistory
+      key = {usermedicalhistory.id}
+      usermedicalhistory = {usermedicalhistory}
+    />
+  )}
+)}
 
-    return (
-      <div className="medical-history-list">
-        <div className="medical-row title-row">
-          <p className="meidcal-name title">Name</p>
-        </div>
-        { mappedMedicalHistories }
-      </div>
-    )
-  }
-  }
+const MedicalHistory = (props) => {
+  const medicalhistories = props.medicalhistories;
+  const usermedicalhistories = props.usermedicalhistories;
+  return (
+  <div>
+  { createMedicalHistoryList(medicalhistories)}
+  { createUserMedicalHistoryList(usermedicalhistories)}
+  </div>
+  )
+}
+
 
 export default MedicalHistory;
