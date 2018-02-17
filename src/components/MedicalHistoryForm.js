@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {updateMedicalHistory} from '../utils/requests'
 
 class MedicalHistoryForm extends Component {
   constructor(props){
@@ -17,6 +18,13 @@ handleInputChange(event) {
       [name]: value
     });
   }
+
+  addMedicalHistory = (event) => {
+    event.preventDefault();
+    const user_id = 1;
+    const medical_history_id = this.state.calories;
+
+}
  createMedicalHistoryLabels = () => {
   const medicalhistory = this.props.medicalhistory;
   return(
@@ -33,9 +41,14 @@ handleInputChange(event) {
 
 render() {
     return (
-      <form>
+      <form className="add-form">
           {this.createMedicalHistoryLabels()}
         <br />
+        <button
+            className="add-medical-history-btn"
+            onClick={this.addMedicalHistory }
+          >
+          </button>
       </form>
     );
   }
