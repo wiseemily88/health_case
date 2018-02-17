@@ -24,22 +24,48 @@ const getUserMedicalHistory = () => {
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
-const patchHeaders = (note) => {
-  return {
-    method: `PATCH`,
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({note: note})
-  }
-}
 
-const updateMedicalHistory =(note) => {
-  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/medical_histories`, patchHeaders(note))
+// const postHeaders = (userId, medicalHistoryId) => {
+//   return {
+//     method: `POST`,
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({user_id: userId, medical_history_id: medicalHistoryId })
+//   }
+// }
+
+const addMedicalHistory =( userId, medicalHistoryId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/medical_histories/` + medicalHistoryId , {
+    method: 'POST',
+    headers:
+      { 'Content-Type': 'application/json' },
+    })
+
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
 
+// const updateMedicalHistory =(note) => {
+//   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/medical_histories`, patchHeaders(note))
+//     .then((response) => handleResponse(response))
+//     .catch((error) => console.error({ error }))
+// }
+//
+// const patchHeaders = (note) => {
+//   return {
+//     method: `PATCH`,
+//     headers: {'Content-Type': 'application/json'},
+//     body: JSON.stringify({note: note})
+//   }
+// }
+
+// const updateMedicalHistory =(note) => {
+//   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/medical_histories`, patchHeaders(note))
+//     .then((response) => handleResponse(response))
+//     .catch((error) => console.error({ error }))
+// }
+
 module.exports ={
   getMedicalHistory,
-  updateMedicalHistory,
   getUserMedicalHistory,
+  addMedicalHistory,
 }

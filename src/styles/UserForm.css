@@ -1,0 +1,29 @@
+.user-form {
+  width: 60%;
+  background-color: #F7F7FF;
+  margin: 0 auto 7.5% auto;
+  padding: 2.5% 5%;
+  border-radius: 5px;
+  border: 1.25px solid #007991;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-lbl {
+  padding: 2px;
+  font-size: 18px;
+  border-bottom: 1.25px solid #007991;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.add-btn {
+  background-color: #3F826D;
+  margin-top: 30px;
+  color: #fff;
+  font-size: 20px;
+}

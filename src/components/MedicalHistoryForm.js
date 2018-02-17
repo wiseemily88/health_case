@@ -1,55 +1,74 @@
 import React, { Component } from 'react';
-import {updateMedicalHistory} from '../utils/requests'
+import {addMedicalHistory} from '../utils/requests';
+import'../styles/UserForm.css';
 
 class MedicalHistoryForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-    isChecked: false,
+      checkedIds: [],
   }
  this.handleInputChange = this.handleInputChange.bind(this);
 }
 handleInputChange(event) {
+
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
 
+let newCheckedIds;
+if (this.state.checkedIds.indexOf(name) === -1) {
+  newCheckedIds = [...this.state.checkedIds, name];
+} else {
+  newCheckedIds=this.state.checkedIds.filter(id => id !== name)
+}
     this.setState({
-      [name]: value
+      checkedIds: newCheckedIds
     });
   }
 
   addMedicalHistory = (event) => {
+
     event.preventDefault();
     const user_id = 1;
-    const medical_history_id = this.state.calories;
+    const medical_history_id = this.state.checkedIds;
+
+  addMedicalHistory(user_id, medical_history_id)
+.then(response=>console.log(response));
 
 }
- createMedicalHistoryLabels = () => {
-  const medicalhistory = this.props.medicalhistory;
+ createMedicalHistoryLabels = (medicalhistories) => {
+
+  return medicalhistories.map((medicalhistory) => {
   return(
-      <label>
+      <label className="form-lbl">
         {medicalhistory.name}
         <input
-          name="isChecked"
+          className="input"
+          key = {medicalhistory.id}
+          name= {medicalhistory.id}
           type="checkbox"
-          checked={this.state.isChecked}
           onChange={this.handleInputChange} />
       </label>
   )
+  })
 }
 
 render() {
     return (
+    <div className="user-form">
+      <h3> Add a New Medical Condition</h3>
+        <h5> Click checkox if answer is "Yes" </h5>
       <form className="add-form">
-          {this.createMedicalHistoryLabels()}
+          {this.createMedicalHistoryLabels(this.props.medicalHistories)}
         <br />
         <button
-            className="add-medical-history-btn"
+            className="add-btn"
             onClick={this.addMedicalHistory }
-          >
-          </button>
+          > Update Medical History
+        </button>
       </form>
+</div>
     );
   }
 }
