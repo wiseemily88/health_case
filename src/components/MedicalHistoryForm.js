@@ -40,12 +40,13 @@ if (this.state.checkedIds.indexOf(name) === -1) {
  createMedicalHistoryLabels = (medicalhistories) => {
 
   return medicalhistories.map((medicalhistory) => {
+
   return(
-      <label className="form-lbl">
-        {medicalhistory.name}
+      <label key = {medicalhistory.id}  className="form-lbl">
+        {medicalhistory.name.charAt(0).toUpperCase() + medicalhistory.name.slice(1)}
         <input
           className="input"
-          key = {medicalhistory.id}
+
           name= {medicalhistory.id}
           type="checkbox"
           onChange={this.handleInputChange} />
