@@ -15,7 +15,7 @@ class App extends Component {
     }
   addUserMedicalHistory = (name) => {
   console.log('got this object! ', this.state.usermedicalhistories);
-    this.setState({usermedicalhistories: [... this.state.usermedicalhistories, name]  })
+    this.setState({usermedicalhistories: [...this.state.usermedicalhistories, name]  })
   }
     componentDidMount(){
       getMedicalHistory()

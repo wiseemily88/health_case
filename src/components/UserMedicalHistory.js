@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
+import {removeMedicalHistory, updateMedicalHistory} from '../utils/requests';
 import '../styles/UserCurrentCard.css';
 
 
 class UserMedicalHistory extends Component {
   constructor(props) {
     super(props);
-    this.state = {note: ''};
+    this.state = {
+    note: '',
+    // usermedicalhistories: [{name: ' '}],
+    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+this.handleUpdateMedicalHistory = this.handleUpdateMedicalHistory.bind(this)
+this.handleRemoveMedicalHistory = this.handleRemoveMedicalHistory.bind(this);
+  }
+ handleRemoveMedicalHistory = (medical_history_id) => {
+  const user_id = 1;
+  removeMedicalHistory(user_id, medical_history_id)
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+handleUpdateMedicalHistory= (medical_history_id) => {
+const user_id = 1;
+const note = this.state.note
+  updateMedicalHistory(note, user_id, medical_history_id)
+
+}
 
   handleSubmit(event) {
     alert('A note was submitted: ' + this.state.value);
@@ -25,12 +36,11 @@ class UserMedicalHistory extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
       <label  className="user-card">
-      {usermedicalhistory.name}
+      {usermedicalhistory.name.charAt(0).toUpperCase() + usermedicalhistory.name.slice(1)}
       </label>
-    <input type="text" value={this.state.value} placeholder="Add a Note" onChange={this.handleChange} />
-    <input type="submit" value="Update" />
-  <input type="submit" value="Remove from History" />
-
+    <input type="text" value={this.state.note} placeholder="Add a Note" onChange={(e) => this.setState({note: e.target.value})} />
+    <button type="button" onClick={() => this.handleRemoveMedicalHistory(usermedicalhistory.id)} className="small"> Remove from History</button>
+    <button type="button" onClick={() => this.handleUpdateMedicalHistory(usermedicalhistory.id)} className="small"> Update</button>
       </form>
     );
   }
