@@ -1,9 +1,9 @@
 .user-card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
-  border-bottom: 1px solid #60ABBA;
+  padding: 2px;
+  border-bottom: 2px solid #99E1D9;
 }
 
 .title {

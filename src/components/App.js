@@ -10,7 +10,13 @@ class App extends Component {
         medicalhistories: [],
         usermedicalhistories: []
       }
+
+      this.addUserMedicalHistory = this.addUserMedicalHistory.bind(this);
     }
+  addUserMedicalHistory = (name) => {
+  console.log('got this object! ', this.state.usermedicalhistories);
+    this.setState({usermedicalhistories: [... this.state.usermedicalhistories, name]  })
+  }
     componentDidMount(){
       getMedicalHistory()
       .then((medicalhistories) => this.setState({ medicalhistories: medicalhistories }))
@@ -28,10 +34,11 @@ class App extends Component {
           <MedicalHistory
             medicalhistories = {this.state.medicalhistories}
             usermedicalhistories= {this.state.usermedicalhistories}
+            addUserMedicalHistory={this.addUserMedicalHistory}
           />
       </div>
     );
   }
 }
-
+App.displayName = 'App';
 export default App;

@@ -20,7 +20,10 @@ const createUserMedicalHistoryList = (usermedicalhistories) => {
     const usermedicalhistories = props.usermedicalhistories;
     return (
       <div className='container'>
-        <MedicalHistoryForm medicalHistories = {medicalhistories} />
+        <MedicalHistoryForm
+        medicalHistories = {medicalhistories}
+        addUserMedicalHistory={props.addUserMedicalHistory}
+        />
         <div className='user-list'>
           <h3> Current Medical History </h3>
           {createUserMedicalHistoryList(usermedicalhistories)}

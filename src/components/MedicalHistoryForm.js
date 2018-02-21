@@ -18,7 +18,7 @@ handleInputChange(event) {
 
 let newCheckedIds;
 if (this.state.checkedIds.indexOf(name) === -1) {
-  newCheckedIds = [...this.state.checkedIds, name];
+  newCheckedIds = [...this.state.checkedIds, {id: name, name: value}];
 } else {
   newCheckedIds=this.state.checkedIds.filter(id => id !== name)
 }
@@ -27,16 +27,21 @@ if (this.state.checkedIds.indexOf(name) === -1) {
     });
   }
 
-  addMedicalHistory = (event) => {
-
+  addNewMedicalHistory = (event, medicalHistoryObj) => {
     event.preventDefault();
     const user_id = 1;
-    const medical_history_id = this.state.checkedIds;
+   // need to figure out how to grab the user id
+    const medical_histories = this.state.checkedIds;
 
-  addMedicalHistory(user_id, medical_history_id)
-.then(response=>console.log(response));
-
+  medical_histories.forEach(function(medical_history) {
+      let medical_history_id = medical_history.id;
+      addMedicalHistory(user_id, medical_history_id)
+      .then((response) => {
+        this.props.addUserMedicalHistory({ name: response.data.name})
+      });
+  }.bind(this))
 }
+
  createMedicalHistoryLabels = (medicalhistories) => {
 
   return medicalhistories.map((medicalhistory) => {
@@ -48,6 +53,8 @@ if (this.state.checkedIds.indexOf(name) === -1) {
           className="input"
 
           name= {medicalhistory.id}
+          value = {medicalhistory.name}
+
           type="checkbox"
           onChange={this.handleInputChange} />
       </label>
@@ -65,7 +72,7 @@ render() {
         <br />
         <button
             className="add-btn"
-            onClick={this.addMedicalHistory }
+            onClick={(event) => this.addNewMedicalHistory(event, this.props.medicalHistories) }
           > Update Medical History
         </button>
       </form>
