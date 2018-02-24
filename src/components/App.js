@@ -15,9 +15,13 @@ class App extends Component {
       }
 
       this.addUserMedicalHistory = this.addUserMedicalHistory.bind(this);
+      this.addImmunization = this.addImmunization.bind(this);
     }
   addUserMedicalHistory = (name) => {
     this.setState({usermedicalhistories: [...this.state.usermedicalhistories, name]  })
+  }
+  addImmunization = (name) => {
+  this.setState({userimmunizations: [...this.state.userimmunizations, name]  })
   }
     componentDidMount(){
       getMedicalHistory()
@@ -25,14 +29,10 @@ class App extends Component {
       .catch((error) => console.error({error}));
 
     this.getCurrentMedicalHistory();
+    this.getCurrentImmunizations();
 
       getImmunizationHistory()
       .then((immunizations) => this.setState({ immunizations: immunizations }))
-      .catch((error) => console.error({error}));
-
-      getUserImmunizations()
-
-      .then((userimmunizations) => this.setState({ userimmunizations: userimmunizations }))
       .catch((error) => console.error({error}));
     }
 
@@ -40,6 +40,11 @@ class App extends Component {
     getUserMedicalHistory()
   .then((usermedicalhistories) => this.setState({ usermedicalhistories: usermedicalhistories }))
   .catch((error) => console.error({error}));
+}
+  getCurrentImmunizations= () => {
+    getUserImmunizations()
+    .then((userimmunizations) => this.setState({ userimmunizations: userimmunizations }))
+    .catch((error) => console.error({error}));
 }
 
 
@@ -57,6 +62,8 @@ class App extends Component {
           <Immunization
             immunizations ={this.state.immunizations}
             userimmunizations ={this.state.userimmunizations}
+            addImmunization={this.addImmunization}
+            getCurrentImmunizations={this.getCurrentImmunizations}
           />
       </div>
     );

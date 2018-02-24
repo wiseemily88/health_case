@@ -9,20 +9,20 @@ class UserImmunizationList extends Component {
     note: '',
     };
 
-this.handleUpdateMedicalHistory = this.handleUpdateImmunization.bind(this)
+// this.handleUpdateMedicalHistory = this.handleUpdateImmunization.bind(this)
 // this.handleRemoveMedicalHistory = this.handleRemoveMedicalHistory.bind(this);
   }
  handleRemoveImmunization = (immunization_id) => {
   const user_id = 1;
   removeImmunization(user_id, immunization_id)
-
+  .then(() => this.props.getCurrentImmunizations() )
   }
 
 handleUpdateImmunization= (immunization_id) => {
 const user_id = 1;
 const note = this.state.note
   updateImmunization(note, user_id, immunization_id)
-
+  .then(() => this.props.getCurrentImmunizations() )
 }
 
   handleSubmit(event) {

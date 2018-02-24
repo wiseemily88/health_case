@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {addUserImmunization} from '../utils/requests';
-import DatePicker from 'react-date-picker';
 import'../styles/UserForm.css';
 
 class ImmunizationForm extends Component {
@@ -25,9 +24,11 @@ handleChange(event) {
     event.preventDefault();
     const user_id = 1;
     const immunization_id = this.state.immunization_id;
-
+    const currentUserImmunization = this.props.addImmunization
     addUserImmunization(user_id, immunization_id)
-  .then((response) => console.log(response));
+    .then((response) => {
+      currentUserImmunization({id: response.data.id, name: response.data.name})
+    });
   }
 
 createOptions = (immunizations) => {

@@ -2,19 +2,21 @@ import React from 'react';
 import ImmunizationForm from './ImmunizationForm';
 import UserImmunizationList from './UserImmunizationList';
 import '../styles/Containers.css';
+import '../styles/UserCurrentList.css';
 
-const createUserImmunizationList = (userimmunizations) => {
+const createUserImmunizationList = (userimmunizations, getCurrentImmunizations) => {
 
   return userimmunizations.map((userimmunization) => {
     return(
       <UserImmunizationList
       key = {userimmunization.id}
       userimmunization = {userimmunization}
+      getCurrentImmunizations = {getCurrentImmunizations}
       />
     )}
   )}
 
-const createImmunizationForm = (immunizations) => {
+const createImmunizationForm = (immunizations, addImmunization) => {
 
   return immunizations.map((immunization) => {
     return(
@@ -22,6 +24,7 @@ const createImmunizationForm = (immunizations) => {
       key = {immunization.id}
       immunization = {immunization}
       immunizations = {immunizations}
+      addImmunization = {addImmunization}
       />
     )}
   )}
@@ -33,11 +36,11 @@ const createImmunizationForm = (immunizations) => {
       <div className='container'>
       <div className='user-list'>
         <h3> Immunization Form </h3>
-        {createImmunizationForm(immunizations)}
+        {createImmunizationForm(immunizations, props.addImmunization)}
         </div>
         <div className='user-list'>
           <h3> Current Immunization Records </h3>
-        {createUserImmunizationList(userimmunizations)}
+        {createUserImmunizationList(userimmunizations, props.getCurrentImmunizations)}
         </div>
     </div>
     )
