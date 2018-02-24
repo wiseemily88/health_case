@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {addMedicalHistory} from '../utils/requests';
+import {addUserImmunization} from '../utils/requests';
 import DatePicker from 'react-date-picker';
 import'../styles/UserForm.css';
 
@@ -7,35 +7,36 @@ class ImmunizationForm extends Component {
   constructor(props){
     super(props)
     this.state = {
-      value: '',
-      date: new Date(),
-      note: ''
+      immunization_id: '',
+      date: '',
       };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addNewImmunizationRecord = this.addNewImmunizationRecord.bind(this);
     this.onChange = this.onChange.bind(this);
   }
   onChange(event) {
     this.setState({date: event.target.value});
 }
 handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({immunization_id: event.target.value});
   }
-  handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
+  addNewImmunizationRecord = (event) => {
     event.preventDefault();
+    const user_id = 1;
+    const immunization_id = this.state.immunization_id;
+
+    addUserImmunization(user_id, immunization_id)
+  .then((response) => console.log(response));
   }
 
 createOptions = (immunizations) => {
   return immunizations.map((immunization) => {
   return(
-
     <option key = {immunization.id}
       value = {immunization.id}>
       {immunization.name}
     </option>
-
   )
 })
 }
@@ -48,13 +49,15 @@ render() {
           {this.createOptions(this.props.immunizations)}
           </select>
         </label>
-      <DatePicker
-        onChange={(e) => this.setState({date: e.target.value})}
-        />
-      <input type="text" value={this.state.note}
-      placeholder="Add a Note" onChange={(e) => this.setState({note: e.target.value})}
-        />
-        <input type="submit" value="Submit" />
+        <input type="date"
+        value={this.state.date}
+        placeholder="Enter the Date"
+        onChange={(e) => this.setState({date: e.target.value})} />
+        <br />
+        <button
+            onClick={this.addNewImmunizationRecord}
+          > Update Immunization Record
+        </button>
       </form>
     );
   }

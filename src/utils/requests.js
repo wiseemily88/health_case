@@ -47,6 +47,15 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const addUserImmunization =( userId, immunizationId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId , {
+    method: 'POST',
+    headers:
+      { 'Content-Type': 'application/json' },
+    })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
 
 const patchHeaders = (note) => {
   return {
@@ -95,4 +104,5 @@ module.exports ={
   getImmunizationHistory,
   getUserImmunizations,
   updateImmunization,
+  addUserImmunization,
 }
