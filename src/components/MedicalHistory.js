@@ -5,12 +5,13 @@ import '../styles/Containers.css';
 import '../styles/UserCurrentList.css';
 
 
-const createUserMedicalHistoryList = (usermedicalhistories) => {
+const createUserMedicalHistoryList = (usermedicalhistories, getCurrentMedicalHistory) => {
   return usermedicalhistories.map((usermedicalhistory) => {
     return(
       <UserMedicalHistory
       key = {usermedicalhistory.id}
       usermedicalhistory = {usermedicalhistory}
+      getCurrentMedicalHistory = {getCurrentMedicalHistory}
       />
     )}
   )}
@@ -22,11 +23,13 @@ const createUserMedicalHistoryList = (usermedicalhistories) => {
       <div className='container'>
         <MedicalHistoryForm
         medicalHistories = {medicalhistories}
+        usermedicalHistories = {usermedicalhistories}
         addUserMedicalHistory={props.addUserMedicalHistory}
+
         />
         <div className='user-list'>
           <h3> Current Medical History </h3>
-          {createUserMedicalHistoryList(usermedicalhistories)}
+          {createUserMedicalHistoryList(usermedicalhistories,props.getCurrentMedicalHistory )}
         </div>
       </div>
     )
