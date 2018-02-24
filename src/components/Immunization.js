@@ -4,37 +4,37 @@ import UserImmunizationList from './UserImmunizationList';
 import '../styles/Containers.css';
 
 const createUserImmunizationList = (userimmunizations) => {
+
   return userimmunizations.map((userimmunization) => {
     return(
-      <UserImmunization
+      <UserImmunizationList
       key = {userimmunization.id}
-      Usermmunization = {userimmunization}
+      userimmunization = {userimmunization}
       />
     )}
   )}
 
-const times = n => f => {
-  let iter = i => {
-    if (i === n) return
-    f (i)
-    iter (i + 1)
-  }
-  return iter (0)
-}
-
 const createImmunizationForm = (immunizations) => {
-  return times(6) ( i =>
+
+  return immunizations.map((immunization) => {
+    return(
       <ImmunizationForm
+      key = {immunization.id}
+      immunization = {immunization}
       immunizations = {immunizations}
       />
-    )
-  }
+    )}
+  )}
 
   const Immunization = (props) => {
-    const immunizations = props.immunizations;
+  const userimmunizations = props.userimmunizations;
+  const immunizations = props.immunizations;
     return (
       <div className='container'>
+      <div className='user-list'>
+        <h3> Immunization Form </h3>
         {createImmunizationForm(immunizations)}
+        </div>
         <div className='user-list'>
           <h3> Current Immunization Records </h3>
         {createUserImmunizationList(userimmunizations)}

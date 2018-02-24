@@ -30,10 +30,12 @@ handleChange(event) {
 createOptions = (immunizations) => {
   return immunizations.map((immunization) => {
   return(
+
     <option key = {immunization.id}
       value = {immunization.id}>
       {immunization.name}
     </option>
+
   )
 })
 }

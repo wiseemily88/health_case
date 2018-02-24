@@ -80,5 +80,4 @@ render() {
 }
 
 
-
 export default MedicalHistoryForm;

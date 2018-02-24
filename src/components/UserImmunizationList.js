@@ -31,9 +31,10 @@ const note = this.state.note
   }
 
   render() {
-    let userimmunization = this.props.Userimmunization;
+    let userimmunization = this.props.userimmunization;
+
     return (
-      <form onSubmit={this.handleSubmit} data-id={userimmunization.id}>
+      <form onSubmit={this.handleSubmit}>
       <label  className="user-card">
       {userimmunization.name.charAt(0).toUpperCase() + userimmunization.name.slice(1)}
       </label>

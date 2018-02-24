@@ -32,7 +32,7 @@ class App extends Component {
 
       getUserImmunizations()
 
-      .then((immunizations) => this.setState({ userimmunizations: userimmunizations }))
+      .then((userimmunizations) => this.setState({ userimmunizations: userimmunizations }))
       .catch((error) => console.error({error}));
     }
 
