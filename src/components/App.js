@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MedicalHistory from './MedicalHistory';
-import {getMedicalHistory, getUserMedicalHistory} from '../utils/requests';
+import Immunization from './Immunization';
+import {getMedicalHistory, getUserMedicalHistory, getImmunizationHistory, getUserImmunizations } from '../utils/requests';
 import '../styles/App.css';
 
 class App extends Component {
@@ -8,24 +9,45 @@ class App extends Component {
       super(props)
       this.state = {
         medicalhistories: [],
-        usermedicalhistories: []
+        usermedicalhistories: [],
+        immunizations:[],
+        userimmunizations: [],
       }
 
       this.addUserMedicalHistory = this.addUserMedicalHistory.bind(this);
+      this.addImmunization = this.addImmunization.bind(this);
     }
   addUserMedicalHistory = (name) => {
-  console.log('got this object! ', this.state.usermedicalhistories);
     this.setState({usermedicalhistories: [...this.state.usermedicalhistories, name]  })
+  }
+  addImmunization = (name) => {
+  this.setState({userimmunizations: [...this.state.userimmunizations, name]  })
   }
     componentDidMount(){
       getMedicalHistory()
       .then((medicalhistories) => this.setState({ medicalhistories: medicalhistories }))
       .catch((error) => console.error({error}));
 
-      getUserMedicalHistory()
-      .then((usermedicalhistories) => this.setState({ usermedicalhistories: usermedicalhistories }))
+    this.getCurrentMedicalHistory();
+    this.getCurrentImmunizations();
+
+      getImmunizationHistory()
+      .then((immunizations) => this.setState({ immunizations: immunizations }))
       .catch((error) => console.error({error}));
     }
+
+  getCurrentMedicalHistory= () => {
+    getUserMedicalHistory()
+  .then((usermedicalhistories) => this.setState({ usermedicalhistories: usermedicalhistories }))
+  .catch((error) => console.error({error}));
+}
+  getCurrentImmunizations= () => {
+    getUserImmunizations()
+    .then((userimmunizations) => this.setState({ userimmunizations: userimmunizations }))
+    .catch((error) => console.error({error}));
+}
+
+
 
   render() {
     return (
@@ -35,6 +57,13 @@ class App extends Component {
             medicalhistories = {this.state.medicalhistories}
             usermedicalhistories= {this.state.usermedicalhistories}
             addUserMedicalHistory={this.addUserMedicalHistory}
+            getCurrentMedicalHistory={this.getCurrentMedicalHistory}
+          />
+          <Immunization
+            immunizations ={this.state.immunizations}
+            userimmunizations ={this.state.userimmunizations}
+            addImmunization={this.addImmunization}
+            getCurrentImmunizations={this.getCurrentImmunizations}
           />
       </div>
     );
