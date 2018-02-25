@@ -63,8 +63,8 @@ if (this.state.checkedIds.indexOf(name) === -1) {
 render() {
     return (
     <div className="user-form">
-      <h3> Add a New Medical Condition</h3>
-        <h5> Click checkox if answer is "Yes" </h5>
+      <h3> Medical History</h3>
+        <h5> Please check to indicate if you have ever had the following conditions: </h5>
       <form className="add-form">
           {this.createMedicalHistoryLabels(this.props.medicalHistories)}
         <br />
