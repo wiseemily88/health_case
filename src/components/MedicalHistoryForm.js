@@ -8,7 +8,8 @@ class MedicalHistoryForm extends Component {
     this.state = {
       checkedIds: [],
   }
- this.handleInputChange = this.handleInputChange.bind(this);
+this.handleInputChange = this.handleInputChange.bind(this);
+this.addNewMedicalHistory = this.addNewMedicalHistory.bind(this);
 }
 handleInputChange(event) {
 
@@ -31,13 +32,17 @@ if (this.state.checkedIds.indexOf(name) === -1) {
     const user_id = 1;
    // need to figure out how to grab the user id
     const medical_history_ids = this.state.checkedIds;
+    const current_ids = this.props.usermedicalHistories.map(medicalHistory => medicalHistory.id);
+    const currentUserMedicalHistory = this.props.addUserMedicalHistory
 
   medical_history_ids.forEach(function(medical_history_id) {
-      addMedicalHistory(user_id, medical_history_id)
-      .then((response) => {
-        this.props.addUserMedicalHistory({ name: response.data.name})
-      });
-  }.bind(this))
+      if (current_ids.indexOf(parseInt(medical_history_id)) === -1) {
+        addMedicalHistory(user_id, medical_history_id)
+        .then((response) => {
+          currentUserMedicalHistory({ id: response.data.id, name: response.data.name})
+        });
+  }
+})
 }
 
  createMedicalHistoryLabels = (medicalhistories) => {
@@ -58,8 +63,8 @@ if (this.state.checkedIds.indexOf(name) === -1) {
 render() {
     return (
     <div className="user-form">
-      <h3> Add a New Medical Condition</h3>
-        <h5> Click checkox if answer is "Yes" </h5>
+      <h3> Medical History</h3>
+        <h5> Please check to indicate if you have ever had the following conditions: </h5>
       <form className="add-form">
           {this.createMedicalHistoryLabels(this.props.medicalHistories)}
         <br />
@@ -73,7 +78,6 @@ render() {
     );
   }
 }
-
 
 
 export default MedicalHistoryForm;

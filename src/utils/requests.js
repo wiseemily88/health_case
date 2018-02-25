@@ -18,6 +18,17 @@ const getMedicalHistory = () => {
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
+const getImmunizationHistory = () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/immunizations`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const getFamilyHistory = () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/family_histories`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
 
 const getUserMedicalHistory = () => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/medical_histories`)
@@ -25,6 +36,22 @@ const getUserMedicalHistory = () => {
     .catch((error) => console.error({ error }))
 }
 
+const getUserImmunizations= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/immunizations`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+const getUserFamilyHistory= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/family_histories`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const getUserPrescriptions= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/prescriptions`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
 
 const addMedicalHistory =( userId, medicalHistoryId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/medical_histories/` + medicalHistoryId , {
@@ -36,6 +63,37 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const addFamilyHistory =( userId, familyHistoryId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/family_histories/` + familyHistoryId , {
+    method: 'POST',
+    headers:
+      { 'Content-Type': 'application/json' },
+    })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const addUserImmunization =( userId, immunizationId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId , {
+    method: 'POST',
+    headers:
+      { 'Content-Type': 'application/json' },
+    })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const addPrescription =( userId, prescriptionName, prescriptionDosage, prescriptionFrequency, prescriptionNote) => {
+  let data ={ name: prescriptionName, dosage: prescriptionDosage, frequency: prescriptionFrequency, note: prescriptionNote}
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions`, {
+  method: "POST",
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(data)
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }));
+  }
+
 
 const patchHeaders = (note) => {
   return {
@@ -43,6 +101,20 @@ const patchHeaders = (note) => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({note: note})
   }
+}
+const updateFamilyHistory =(note, userId, familyHistoryId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/family_histories/` + familyHistoryId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+const removeFamilyHistory =(userId, familyHistoryId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/family_histories/` + familyHistoryId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
 }
 
 const updateMedicalHistory =(note, userId, medicalHistoryId) => {
@@ -60,10 +132,55 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const removePrescription =(userId, prescriptionId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const updateImmunization =(note, userId, immunizationId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const updatePrescription=(note, userId, prescriptionId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+const removeImmunization =(userId, immunizationId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 module.exports ={
   getMedicalHistory,
   getUserMedicalHistory,
   addMedicalHistory,
   removeMedicalHistory,
   updateMedicalHistory,
+  getImmunizationHistory,
+  getUserImmunizations,
+  updateImmunization,
+  addUserImmunization,
+  removeImmunization,
+  getFamilyHistory,
+  addFamilyHistory,
+  getUserFamilyHistory,
+  updateFamilyHistory,
+  removeFamilyHistory,
+  getUserPrescriptions,
+  addPrescription,
+  removePrescription,
+  updatePrescription,
 }
