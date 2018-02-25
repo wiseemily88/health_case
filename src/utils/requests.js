@@ -47,6 +47,12 @@ const getUserFamilyHistory= () => {
     .catch((error) => console.error({ error }))
 }
 
+const getUserPrescriptions= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/prescriptions`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 const addMedicalHistory =( userId, medicalHistoryId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/medical_histories/` + medicalHistoryId , {
     method: 'POST',
@@ -145,4 +151,5 @@ module.exports ={
   getUserFamilyHistory,
   updateFamilyHistory,
   removeFamilyHistory,
+  getUserPrescriptions,
 }
