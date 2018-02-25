@@ -18,6 +18,7 @@ class App extends Component {
       }
 
       this.addUserMedicalHistory = this.addUserMedicalHistory.bind(this);
+      this.addUserFamilyHistory = this.addUserFamilyHistory.bind(this);
       this.addImmunization = this.addImmunization.bind(this);
     }
   addUserMedicalHistory = (name) => {
@@ -26,7 +27,7 @@ class App extends Component {
   addImmunization = (name) => {
   this.setState({userimmunizations: [...this.state.userimmunizations, name]  })
   }
-  addFamilyHistory = (name) => {
+  addUserFamilyHistory = (name) => {
   this.setState({userfamilyhistories: [...this.state.userfamilyhistories, name]  })
   }
     componentDidMount(){
@@ -78,7 +79,7 @@ class App extends Component {
           <FamilyHistory
             familyhistories = {this.state.familyhistories}
             userfamilyhistories ={this.state.userfamilyhistories}
-            addFamilyHistory={this.addFamilyHistory}
+            addUserFamilyHistory={this.addUserFamilyHistory}
             getCurrentFamilyHistory={this.getCurrentFamilyHistory}
           />
           <Immunization

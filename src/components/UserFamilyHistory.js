@@ -17,7 +17,7 @@ this.handleUpdateFamilyHistory = this.handleUpdateFamilyHistory.bind(this)
  handleRemoveFamilyHistory = (medical_history_id) => {
   const user_id = 1;
   removeFamilyHistory(user_id, medical_history_id)
-  .then(() => this.props.getCurrentMedicalHistory() )
+  .then(() => this.props.getCurrentFamilyHistory() )
   }
 
 handleUpdateFamilyHistory= (family_history_id) => {

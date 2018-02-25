@@ -24,7 +24,7 @@ const createUserFamilyHistoryList = (userfamilyhistories, getCurrentFamilyHistor
         <FamilyHistoryForm
         familyhistories = {familyhistories}
         userfamilyhistories = {userfamilyhistories}
-        addUserMedicalHistory={props.addUserFamilyHistory}
+        addUserFamilyHistory={props.addUserFamilyHistory}
         />
 
       <div className='user-list'>
