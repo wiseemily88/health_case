@@ -47,6 +47,12 @@ const getUserFamilyHistory= () => {
     .catch((error) => console.error({ error }))
 }
 
+const getUserPrescriptions= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/prescriptions`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 const addMedicalHistory =( userId, medicalHistoryId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/medical_histories/` + medicalHistoryId , {
     method: 'POST',
@@ -76,6 +82,18 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
+
+const addPrescription =( userId, prescriptionName, prescriptionDosage, prescriptionFrequency, prescriptionNote) => {
+  let data ={ name: prescriptionName, dosage: prescriptionDosage, frequency: prescriptionFrequency, note: prescriptionNote}
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions`, {
+  method: "POST",
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(data)
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }));
+  }
+
 
 const patchHeaders = (note) => {
   return {
@@ -114,8 +132,24 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const removePrescription =(userId, prescriptionId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 const updateImmunization =(note, userId, immunizationId) => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const updatePrescription=(note, userId, prescriptionId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, patchHeaders(note))
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
@@ -145,4 +179,8 @@ module.exports ={
   getUserFamilyHistory,
   updateFamilyHistory,
   removeFamilyHistory,
+  getUserPrescriptions,
+  addPrescription,
+  removePrescription,
+  updatePrescription,
 }
