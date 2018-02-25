@@ -21,7 +21,7 @@ const createUserPrescriptionList = (userprescriptions, getCurrentPrescriptions) 
     return (
       <div className='container'>
         <PrescriptionForm
-        addUserMedicalHistory={props.addPrescription}
+        addUserPrescription={props.addUserPrescription}
         />
         <div className='user-list'>
           <h3> Current Prescriptions </h3>

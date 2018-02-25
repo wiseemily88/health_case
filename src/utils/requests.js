@@ -83,6 +83,18 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const addPrescription =( userId, prescriptionName, prescriptionDosage, prescriptionFrequency, prescriptionNote) => {
+  let data ={ name: prescriptionName, dosage: prescriptionDosage, frequency: prescriptionFrequency, note: prescriptionNote}
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions`, {
+  method: "POST",
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(data)
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }));
+  }
+
+
 const patchHeaders = (note) => {
   return {
     method: `PATCH`,
@@ -152,4 +164,5 @@ module.exports ={
   updateFamilyHistory,
   removeFamilyHistory,
   getUserPrescriptions,
+  addPrescription,
 }

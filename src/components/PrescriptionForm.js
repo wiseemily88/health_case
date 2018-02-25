@@ -15,15 +15,19 @@ class PrescriptionForm extends Component {
  updatePrescriptionInfo = (key, event) => {
     this.setState({ [key]: event.target.value })
   }
-addPrescription = (event) => {
+addNewPrescription = (event) => {
     event.preventDefault();
     const name = this.state.name;
     const dosage = this.state.dosage;
     const frequency = this.state.frequency;
     const note = this.state.note;
+    const userId = 1;
+    const currentUserPrescription = this.props.addUserPrescription;
 
-    addPrescription(name, dosage, frequency, note)
-
+    addPrescription(userId, name, dosage, frequency, note)
+    .then((response) => {
+      currentUserPrescription({ id: response.data.id, name: response.data.name, dosage: response.data.dosage, frequency: response.data.frequency, note: response.data.note})
+    })
   }
 
 
