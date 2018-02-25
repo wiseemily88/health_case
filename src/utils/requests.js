@@ -132,6 +132,16 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
     .catch((error) => console.error({ error }))
 }
 
+const removePrescription =(userId, prescriptionId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 const updateImmunization =(note, userId, immunizationId) => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, patchHeaders(note))
     .then((response) => handleResponse(response))
@@ -165,4 +175,5 @@ module.exports ={
   removeFamilyHistory,
   getUserPrescriptions,
   addPrescription,
+  removePrescription,
 }
