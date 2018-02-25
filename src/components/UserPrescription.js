@@ -30,8 +30,6 @@ const frequency = this.state.frequency
   .then(() => this.props.getCurrentPrescriptions() )
 }
 
-
-
   render() {
     let userprescription = this.props.userprescription;
     return (

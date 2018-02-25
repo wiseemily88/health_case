@@ -147,6 +147,12 @@ const updateImmunization =(note, userId, immunizationId) => {
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
+
+const updatePrescription=(note, userId, prescriptionId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
 const removeImmunization =(userId, immunizationId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, {
   method: 'DELETE',
@@ -176,4 +182,5 @@ module.exports ={
   getUserPrescriptions,
   addPrescription,
   removePrescription,
+  updatePrescription,
 }
