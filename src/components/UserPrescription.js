@@ -12,7 +12,7 @@ class UserPrescription extends Component {
     note: '',
     };
 
-// this.handleUpdatePrescription = this.handleUpdatePrescription.bind(this)
+
 
   }
  handleRemovePrescription = (prescription_id) => {
