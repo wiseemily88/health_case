@@ -21,7 +21,7 @@ class UserPrescription extends Component {
   .then(() => this.props.getCurrentPrescriptions() )
   }
 
-handleUpdatePrescriptiony= (prescription_id) => {
+handleUpdatePrescription= (prescription_id) => {
 const user_id = 1;
 const note = this.state.note
 const dosage = this.state.dosage
