@@ -18,6 +18,11 @@ const getMedicalHistory = () => {
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
+const getHealthMaintenances = () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/health_maintenances`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
 const getImmunizationHistory = () => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/immunizations`)
     .then((response) => handleResponse(response))
@@ -38,6 +43,11 @@ const getUserMedicalHistory = () => {
 
 const getUserImmunizations= () => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/immunizations`)
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+const getUserHealthMaintenance= () => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/1/health_maintenances`)
     .then((response) => handleResponse(response))
     .catch((error) => console.error({ error }))
 }
@@ -80,6 +90,16 @@ return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId
 
 const addUserImmunization =( userId, immunizationId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId , {
+    method: 'POST',
+    headers:
+      { 'Content-Type': 'application/json' },
+    })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const addUserHealthMaintenance =( userId, healthMaintenanceId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/health_maintenances/` + healthMaintenanceId , {
     method: 'POST',
     headers:
       { 'Content-Type': 'application/json' },
@@ -173,6 +193,12 @@ const updateImmunization =(note, userId, immunizationId) => {
     .catch((error) => console.error({ error }))
 }
 
+const updateHealthMaintenace =(note, userId, healthMaintenanceId) => {
+  return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/health_maintenances/` + healthMaintenanceId, patchHeaders(note))
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
 const updatePrescription=(note, userId, prescriptionId) => {
   return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/prescriptions/` + prescriptionId, patchHeaders(note))
     .then((response) => handleResponse(response))
@@ -180,6 +206,16 @@ const updatePrescription=(note, userId, prescriptionId) => {
 }
 const removeImmunization =(userId, immunizationId) => {
 return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/immunizations/` + immunizationId, {
+  method: 'DELETE',
+  headers:
+    { 'Content-Type': 'application/json' },
+  })
+    .then((response) => handleResponse(response))
+    .catch((error) => console.error({ error }))
+}
+
+const removeHealthMaintenance =(userId, healthMaintenanceId) => {
+return fetch(`https://gentle-citadel-13422.herokuapp.com/api/v1/users/` + userId + `/health_maintenances/` + healthMaintenanceId, {
   method: 'DELETE',
   headers:
     { 'Content-Type': 'application/json' },
@@ -211,4 +247,9 @@ module.exports ={
   getUserSurgicalHistories,
   addSurgicalHistory,
   removeSurgicalHistory,
+  getHealthMaintenances,
+  getUserHealthMaintenance,
+  addUserHealthMaintenance,
+  updateHealthMaintenace,
+  removeHealthMaintenance,
 }

@@ -4,6 +4,7 @@ import Immunization from './Immunization';
 import FamilyHistory from './FamilyHistory';
 import Prescription from './Prescription';
 import SurgicalHistory from './SurgicalHistory';
+import HealthMaintenance from './HealthMaintenance';
 import {getMedicalHistory,
         getUserMedicalHistory,
         getImmunizationHistory,
@@ -12,6 +13,8 @@ import {getMedicalHistory,
         getUserFamilyHistory,
         getUserPrescriptions,
         getUserSurgicalHistories,
+        getHealthMaintenances,
+        getUserHealthMaintenance,
       } from '../utils/requests';
 import '../styles/App.css';
 
@@ -27,6 +30,8 @@ class App extends Component {
         userfamilyhistories: [],
         userprescriptions: [],
         usersurgicalhistories: [],
+        healthmaintenances:[],
+        userhealthmaintenances:[],
       }
 
       this.addUserMedicalHistory = this.addUserMedicalHistory.bind(this);
@@ -34,6 +39,7 @@ class App extends Component {
       this.addImmunization = this.addImmunization.bind(this);
       this.addUserPrescription = this.addUserPrescription.bind(this);
       this.addUserSurgicalHistory = this.addUserPrescription.bind(this);
+      this.addhealthMaintenance = this.addhealthMaintenance.bind(this);
     }
     addUserMedicalHistory = (name) => {
       this.setState({usermedicalhistories: [...this.state.usermedicalhistories, name]  })
@@ -50,6 +56,9 @@ class App extends Component {
     addUserSurgicalHistory = (name) => {
     this.setState({usersurgicalhistories: [...this.state.usersurgicalhistories, name]  })
     }
+    addhealthMaintenance = (name) => {
+    this.setState({userhealthmaintenances: [...this.state.healthmaintenances, name]  })
+    }
     componentDidMount(){
       getMedicalHistory()
       .then((medicalhistories) => this.setState({ medicalhistories: medicalhistories }))
@@ -63,12 +72,17 @@ class App extends Component {
       .then((familyhistories) => this.setState({ familyhistories: familyhistories }))
       .catch((error) => console.error({error}));
 
+      getHealthMaintenances()
+      .then((healthmaintenances) => this.setState({ healthmaintenances: healthmaintenances }))
+      .catch((error) => console.error({error}));
+
 
       this.getCurrentMedicalHistory();
       this.getCurrentFamilyHistory();
       this.getCurrentImmunizations();
       this.getCurrentPrescriptions();
       this.getCurrentSurgicalHistories();
+      this.getCurrentHealthMaintenance();
     }
   getCurrentMedicalHistory= () => {
     getUserMedicalHistory()
@@ -78,6 +92,12 @@ class App extends Component {
   getCurrentImmunizations= () => {
     getUserImmunizations()
     .then((userimmunizations) => this.setState({ userimmunizations: userimmunizations }))
+    .catch((error) => console.error({error}));
+}
+
+  getCurrentHealthMaintenance= () => {
+    getUserHealthMaintenance()
+    .then((userhealthmaintenances) => this.setState({ userhealthmaintenances: userhealthmaintenances }))
     .catch((error) => console.error({error}));
 }
   getCurrentFamilyHistory= () => {
@@ -129,6 +149,13 @@ class App extends Component {
             getCurrentSurgicalHistories={this.getCurrentSurgicalHistories}
             addUserSurgicalHistory={this.addUserSurgicalHistory}
           />
+          <HealthMaintenance
+            healthmaintenances ={this.state.healthmaintenances}
+            userhealthmaintenances ={this.state.userhealthmaintenances}
+            addhealthMaintenance={this.addhealthMaintenance}
+            getCurrentHealthMaintenance={this.getCurrentHealthMaintenance}
+          />
+
       </div>
     );
   }
