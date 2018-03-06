@@ -10,23 +10,27 @@ Node.js
 #### Installing
 * Clone the frontend app and change into the 'health_case' directory:
 
- ```git clone https://github.com/wiseemily88/health_case.git
+ ```
+  git clone https://github.com/wiseemily88/health_case.git
  cd health_case
 ```
 
 * Install the dependencies of the starter kit:
-```npm install
+```
+npm install
 npm start
 ```
  to view the application locally
 
 * The Backend is located here: https://emily-wise-myhealthcase.herokuapp.com/ health_case_api directory:
-```git clone https://github.com/wiseemily88/health_case_api.git
+```
+git clone https://github.com/wiseemily88/health_case_api.git
 cd health_case_api
 ```
 * Run the following commands in your terminal to start the server:
 
-```bundle install
+```
+bundle install
 Rails s
 ```
 
