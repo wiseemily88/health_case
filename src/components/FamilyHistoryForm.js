@@ -30,7 +30,6 @@ if (this.state.checkedIds.indexOf(name) === -1) {
   addNewFamilyHistory = (event) => {
     event.preventDefault();
     const user_id = 1;
-   // need to figure out how to grab the user id
     const family_history_ids = this.state.checkedIds;
     const current_ids = this.props.userfamilyhistories.map(familyhistory => familyhistory.id);
     const currentUserFamilyHistory = this.props.addUserFamilyHistory

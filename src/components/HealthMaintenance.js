@@ -16,7 +16,7 @@ const createHealthMaintenanceList = (userhealthmaintenances, getCurrentHealthMai
     )}
   )}
 
-const createHealthMaintenanceForm = (healthmaintenances, addhealthMaintenance) => {
+const createHealthMaintenanceForm = (healthmaintenances, addUserHealthMaintenance) => {
 
   return healthmaintenances.map((healthmaintenance) => {
     return(
@@ -24,7 +24,7 @@ const createHealthMaintenanceForm = (healthmaintenances, addhealthMaintenance) =
       key = {healthmaintenance.id}
       healthmaintenance = {healthmaintenance}
       healthmaintenances = {healthmaintenances}
-      addhealthMaintenance = {addhealthMaintenance}
+      addUserHealthMaintenance = {addUserHealthMaintenance}
       />
     )}
   )}
@@ -36,7 +36,7 @@ const createHealthMaintenanceForm = (healthmaintenances, addhealthMaintenance) =
       <div className='container'>
       <div className='user-list'>
         <h3> Health Maintenance Form </h3>
-        {createHealthMaintenanceForm(healthmaintenances, props.addhealthMaintenance)}
+        {createHealthMaintenanceForm(healthmaintenances, props.addUserHealthMaintenance)}
         </div>
         <div className='user-list'>
           <h3> Current Health Maintenance Records </h3>

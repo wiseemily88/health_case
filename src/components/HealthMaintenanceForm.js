@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {addUserHealthMaintenance} from '../utils/requests';
+import {addHealthMaintenance} from '../utils/requests';
 import'../styles/UserForm.css';
 
 class HealthMaintenanceForm extends Component {
@@ -24,11 +24,11 @@ handleChange(event) {
     event.preventDefault();
     const user_id = 1;
     const health_maintenance_id = this.state.health_maintenance_id;
-    const currentUserhealthMaintenace = this.props.addhealthMaintenance
-    console.log(health_maintenance_id);
-    addUserHealthMaintenance(user_id, health_maintenance_id)
+    const currentUserhealthMaintenace = this.props.addUserHealthMaintenance
+    addHealthMaintenance(user_id, health_maintenance_id)
     .then((response) => {
-      currentUserhealthMaintenace ({id: response.data.id, name: response.data.name, date:response.data.date})
+
+      currentUserhealthMaintenace({id: response.data.id, name: response.data.name, date:response.data.date})
     });
   }
 
